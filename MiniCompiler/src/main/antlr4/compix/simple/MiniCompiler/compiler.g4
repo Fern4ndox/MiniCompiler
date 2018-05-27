@@ -1,0 +1,67 @@
+grammar compiler;
+programa: def_var| mostrar_text| declarar | operacion; 
+val: ID | ENTERO | TRUE_COND | FALSE_COND ;
+mostrar_text: PROGRAM PAR_AP mostrar SEMICOLON PAR_CI;
+mostrar: PRINTLN PAR_AP COMILLA texto COMILLA PAR_CI ;
+operacion: PROGRAM PAR_AP val aritmetico val ASSIGN val SEMICOLON PAR_CI;
+declarar: PROGRAM PAR_AP declare* SEMICOLON PAR_CI ;
+declarar_string: STRING val ASSIGN ID;
+def_var:STRING val ASSIGN val SEMICOLON;
+declare: declarar_string | declarar_int;
+declarar_int: exp val ASSIGN ENTERO;
+dato: FLOAT | ENTERO;
+dobles: DECRE | INCRE;
+exp: FLOAT | ENTERO | ID | INT;
+aritmetico: SUM | RES | MULT | DIV | MOD | POT ;
+operador: OR | AND | DIF | IGUALD | MAYQ | MENQ | MAYOQ | MENOQ;
+caden: ID | ENTERO ;
+value: TRUE_COND | FALSE_COND;
+texto: ID | INT | val ;
+VAR: INT | STRING | CHAR;
+STRING : 'CADENA';
+PROGRAM: 'begin';
+PRINTLN:'show';
+PRINTE: 'show_in';
+IF:'cond_way';
+FORI:'flash';
+INT:'uch';
+CHAR:'leo';
+BOOL:'two_face';
+SUM:'+';
+LLAVE_AP:'{';
+LLAVE_END:'}';
+RES:'-';
+MULT:'*';
+DIV:'/';
+MOD:'%';
+POT:'^';
+OR:'||';
+AND:'&&';
+DIF:'!=';
+IGUALD:'==';
+MAYQ:'>';
+MENQ:'<';
+MAYOQ:'>=';
+MENOQ:'<=';
+INCRE:'++';
+DECRE:'--';
+TRUE_COND: 'spidy';
+FALSE_COND: 'venom';
+ASSIGN:'=';
+COM:',';
+SEMICOLON:';';
+PAR_AP	:'(';
+PAR_CI	:')';
+COR_AP	:'{';
+COR_CI	:'}';
+COMILLA: '"';
+ID: [a-zA-Z][a-zA-Z0-9]*;
+WORDS: [a-zA-Z]+[ \t\n\r]*?;
+
+//GRAMATICA PARA UN NUMERO ENTERO
+ENTERO: [0-9]+;
+
+//GRAMATICA PARA UN NUMERO REAL
+FLOAT: [0-9]+.[0-9]+?;
+
+WS:[ \t\r\n]+ -> skip;
